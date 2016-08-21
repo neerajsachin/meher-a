@@ -171,7 +171,7 @@ $scope.getVehicleByRecordID = function(){
 
 //INIT
 if(recordID!='00' && recordID!='CLN'){
-	
+	$scope.vehicleDeleted = false;	
 	$scope.getVehicleByRecordID();
 } 
 //INIT END
@@ -572,6 +572,7 @@ deleteStatusMsg = null;
 incorrectAnswer = null;
 	$scope.incorrectAnswer = false;
 	if(confirmNumber != '1407'){
+	$log.log('checking delete confirmNumber');
      $scope.incorrectAnswer = true;
 		return ;
 	}
@@ -579,10 +580,22 @@ $log.log('vehicle controller delete item for ' + itemType + " - " + itemID );
 	commonFactory.deleteItem(itemType, itemID, function(err,data){
 	if(err || data.status == 'E'){
 		$scope.deleteStatusMsg = err;
+		return;
 	}
 	if(data.status == 'S'){
 		$scope.deleteStart  = false;
-		$scope.deleteStatusMsg = "RECORD DELETED PLS CLOSE WINDOW and REFRESH LIST";
+
+		if(itemType == 'VEH'){
+		$scope.deleteStatusMsg = "VEHCILE IS DELETED";		
+		$scope.vehicle = {};		
+		$scope.vehicleDeleted = true;
+		
+		}else{
+
+		$scope.deleteStatusMsg = "RECORD DELETED PLS CLOSE WINDOW and REFRESH LIST";	
+		}
+		
+		
 	}
 	
 });
