@@ -1,0 +1,57 @@
+<div  class="row">
+<div class="col-xs-12 col-md-12">
+  <form  name="globalDVPForm">
+<label> Show me all vehicles with documents  expiring  in : </label>
+  <select  class="input-xs "  ng-model="duration" >
+      <option value="2">2 Days</option>
+      <option value="5">5 Days</option>
+	  <option value="10">10 Days</option>
+	  <option value="15">15 Days</option>
+    </select>
+  <button  type="button" class="btn   btn-warning" ng-click="getVehicleList(duration)">Submit</button> 
+  
+ </form>
+ </div>
+ </div>
+ <div  class="row">
+ Total vehicle count : {{TotalCount}}
+ </div>
+ <div  class="row">
+<div class="col-xs-12 col-md-12">
+  <table  class="table table-condensed table-striped table-bordered table-hover " ng-table="tableParams"  >
+
+
+
+<tr class="ng-table-group" ng-repeat-start="group in $groups" >
+ <td colspan="7" >
+            <a href="" ng-click="group.$hideRows = !group.$hideRows">
+              <span class="glyphicon" ng-class="{ 'glyphicon-chevron-right': group.$hideRows, 'glyphicon-chevron-down': !group.$hideRows }"></span>
+              <strong>{{ group.value }}</strong>
+            </a>
+          </td> 
+
+</tr>
+		
+		<tr  ng-hide="group.$hideRows" ng-repeat="vehicle in group.data" ng-repeat-end  >
+		<td title="'Company ID'"  ><a  ng-href="#showCompany/{{vehicle.company_id}}">{{vehicle.company_id}}</a></td>
+		<td  title="'Company Name'" groupable="'company_name'">{{vehicle.company_name}}</td>
+		<td sortable="'registration_no'" title="'Reg No.'" > <a  ng-href="#vehicle/{{vehicle.record_id}}" >{{vehicle.registration_no}}</a></td>
+		<td title="'Owner'"  >{{vehicle.owner}}</td>
+		<td title="'CF'" ng-class="checkAlert(convertStringToDate(vehicle.ft_exp_dt))">{{convertStringToDate(vehicle.ft_exp_dt) | date:'dd/MM/yyyy'}}</td>
+		<td title="'Tax'" ng-class="checkAlert(convertStringToDate(vehicle.tax_exp_dt))">{{convertStringToDate(vehicle.tax_exp_dt) | date:'dd/MM/yyyy'}}</td>
+		<td title="'NP(A)'" ng-class="checkAlert(convertStringToDate(vehicle.npa_exp_dt))">{{convertStringToDate(vehicle.npa_exp_dt) | date:'dd/MM/yyyy'}}</td>
+		<td title="'NP(B)'" ng-class="checkAlert(convertStringToDate(vehicle.npb_exp_dt))">{{convertStringToDate(vehicle.npb_exp_dt) | date:'dd/MM/yyyy'}}</td>
+	
+		
+		
+			
+		
+	</tr>
+	
+	
+
+</table>
+  
+ </div>
+ </div>
+ 

@@ -1,0 +1,118 @@
+<div class="modal fade" id="nationalPermitModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+	   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  
+	  <h4 class="modal-title" id="myModalLabel">National Permit <span ng-show="nationalPermitCurrent.national_permit_id"> (Record ID: {{nationalPermitCurrent.national_permit_id}})</span>  <span class="btn-group pull-right" ng-show= "nationalPermitCurrent.national_permit_id">
+        <button   type="button" class="btn  btn-warning" ng-click="printForm( 'GNP')">Grant Of NP</button>
+		
+		
+      </span></h4>
+      
+       
+      </div>
+      <div class="modal-body">
+	  <label ng-show="vehicle.permit_no">Permit No.:</label>{{vehicle.permit_no}}
+	  <label>Issue Dt.:</label>
+		<input  class="input-xs"    type="date" ng-model="nationalPermitCurrent.issue_dt" maxlength="10" size="10" ng-disabled="!editModeNationalPermit" > </input>
+	  <br></br>
+	  <label><u>NP(A)</u></label>
+	  <label>From:</label>
+	  <!-- <input  class="input-xs"  type="text" ng-model="nationalPermitCurrent.from_date" maxlength="12" > </input> -->
+	  <input  class="input-xs"    type="date" ng-model="nationalPermitCurrent.from_date" maxlength="10" size="10" ng-disabled="!editModeNationalPermit" > </input>
+	  <div class="btn-group" ">
+        <!-- <button   type="button" class="btn  btn-warning" ng-click="addNPA('6M')">6M</button> -->
+		<button   type="button" class="btn-success" ng-click="addNPA('1Y')">1Y</button>
+			
+      </div>
+     <label>To:</label>
+	 <input  class="input-xs"    type="date" ng-model="nationalPermitCurrent.to_date" maxlength="10" size="10" ng-disabled="!editModeNationalPermit" > </input> 
+	 
+    
+	 <br></br>
+       	<label><u>NP(B)</u></label>
+		<label>From:</label>
+		<input  class="input-xs"    type="date" ng-model="nationalPermitCurrent.from_date_b" maxlength="10" size="10" ng-disabled="!editModeNationalPermit" > </input>
+		<div class="btn-group" ">
+        <button   type="button" class="btn-warning" ng-click="addNPB('5Y')">5Y</button>
+		</div>
+		<label>To:</label> 
+		<input  class="input-xs"    type="date" ng-model="nationalPermitCurrent.to_date_b" maxlength="10" size="10" ng-disabled="!editModeNationalPermit" > </input>
+		
+		
+<br></br>
+	  <label>Authority:</label>
+	  <span>{{nationalPermitCurrent.authority}} </span>
+	   <label>Application Date:</label>
+	  <input  class="input-xs"    type="date" ng-model="nationalPermitCurrent.apply_dt" maxlength="10" size="10" ng-disabled="!editModeNationalPermit" > </input>
+	  
+	  <!-- <select  class="input-xs" ng-disabled="!editModeNationalPermit" ng-model="nationalPermitCurrent.authority" ng-init = "nationalPermitCurrent.authority = 'Nagaland'">
+      <option value="Assam">Assam</option>
+      <option value="Nagaland" selected="selected">Nagaland</option>
+    </select> -->
+	
+	  <!-- <input  class="input-xs" ng-disabled="!editModeNationalPermit"  type="text" ng-model="nationalPermitCurrent.authority"  > </input> -->
+	
+	  
+	  <br></br>
+	
+	<table class="table table-striped table-bordered table-condensed jambo_table">
+<thead>
+	<tr>
+		<th>State</th>
+		<th>Payment Date</th>
+		<th>Particulars</th>
+		<th>Amount Paid.</th>
+				
+	</tr>
+</thead>
+<tbody>
+	<tr >
+		<td>{{nationalPermitCurrent.authority}}</td>
+		<td>
+		<input  class="input-xs"    type="date" ng-model="nationalPermitCurrent.payment_date_state" maxlength="10" size="10" ng-disabled="!editModeNationalPermit" > </input>
+		</td>
+		
+		<td><input  class="input-xs" ng-disabled="!editModeNationalPermit" type="text" ng-model="nationalPermitCurrent.particulars_state" maxlength="100" size="50" > </input></td>
+		<td><input  class="input-xs" ng-disabled="!editModeNationalPermit" type="number" ng-model="nationalPermitCurrent.state_amount" max="5000" > </input></td>
+		
+		
+		
+	</tr>
+	<tr >
+		<td>All India</td>
+		<td><input  class=" input-xs" ng-disabled="!editModeNationalPermit" type="date" ng-model="nationalPermitCurrent.payment_date_national" maxlength="10" size="10" > </input></td>
+			
+		
+		<td><input  class=" input-xs" ng-disabled="!editModeNationalPermit" type="text" ng-model="nationalPermitCurrent.particulars_national" maxlength="100" size="50" > </input></td>
+		<td><input  class=" input-xs" ng-disabled="!editModeNationalPermit" type="number" ng-model="nationalPermitCurrent.national_amount"  max="25000"> </input></td>
+		
+		
+	
+	</tr>
+	<tr>
+	<td colspan="3">Total</td>
+	<td>{{getTotalNationalPermit()}} </td>
+	
+	</tr>
+	</tbody>
+  </table>
+  
+		  
+	  <label>Remark:</label><textarea  class="input-xs" ng-disabled="!editModeNationalPermit"   ng-model="nationalPermitCurrent.remarks"  > </textarea>	  
+
+  <div class="red" ng-show="modalNationalPermitShowError">{{modalNationalPermitErrorMsg}}</div>
+	 <div>
+	 <button ng-show = "editModeNationalPermit"  type="button" class="btn btn-default" ng-click="saveNationalPermit()"><span ng-show="counterNPAisGreater || counterVehicleRegExp">Still </span>Save</button>
+	  
+	  <button ng-show = "!editModeNationalPermit" type="button" class="btn btn-default" ng-click="editModeNationalPermit = true">Edit</button>
+	  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	  </div>
+	 <span ng-show="false"> {{calc_toDateNPATxt()}}{{calc_fromDateNPATxt()}}{{calc_toDateNPBTxt()}}{{calc_fromDateNPBTxt()}} </span>
+	  </div>
+	  </div>
+     
+    </div>
+  </div>
+</div>

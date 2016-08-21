@@ -1,0 +1,83 @@
+ <div class="row">
+   <div class="col-md-12 col-sm-12 col-xs-12">
+<div  class="row">
+<h4>Search Vehicle</h4>
+</div>
+
+<div  class="row">
+<!-- <label>Search By - </label>  
+
+<select  class="input-xs" ng-model="criteria" ng-init = "criteria = '1'">
+      <option value="1" selected="selected">Registration No</option>
+      <option value="2" >Permit No</option>
+	  <option value="3" >Company Name</option>
+    </select> -->
+	
+  <form  name="searchVehicleForm">
+<input  placeholder = "Company Name , Owner Name , Registration No, Permit No, Chassis No, Engine No" class="input-xs"  type="text" ng-model="txt" maxlength="50" size="80"  required autofocus> </input> 
+ <button  type="submit" class="btn   btn-primary" ng-click="searchVehicle()">Go</button> 
+ </form>
+	
+</div>
+
+<div>
+Total Count - {{vehiclesList.length}} , 
+Filtered Count - {{filtered.length}}
+</div>
+
+<div class="row" ng-show="vehiclesList.length">
+<table class="table table-striped table-bordered jambo_table">
+<thead>
+<tr>
+		<th>ID</th>
+		<th>Reg No</th>
+		<th>Permit No</th>
+		<th>Chassis No</th>
+		<th>Engine No</th>
+		<th>Company</th>
+		<th>Owner</th>
+
+</tr>
+</thead>
+<tfoot>
+<td colspan = "7"> 
+ <!-- <uib-pagination total-items="filtered.length" ng-model="bigCurrentPage"  class="pagination-sm"  ></uib-pagination> -->
+ <!-- <uib-pagination boundary-links="true" total-items="totalItems" ng-model="bigCurrentPage" max-size = "" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>  -->
+ 
+  <uib-pagination total-items="filtered.length" ng-model="bigCurrentPage" max-size="maxSize" entry-limit="entryLimit" class="pagination-sm" boundary-links="true" rotate="false"></uib-pagination>
+  
+</td>
+
+</tfoot>
+<tbody>
+<tr>
+<td colspan = "7">  <input type="text" ng-model="localSearch" placeholder = "Advance filter"   /></td>
+
+</tr>
+<tr  ng-repeat="vehicle in filtered = (vehiclesList | filter:localSearch) | startFrom:(bigCurrentPage-1)*entryLimit | limitTo:entryLimit">
+		<td><u><a  ng-href="#vehicle/{{vehicle.record_id}}"> {{vehicle.record_id}}</a></u></td>
+		<td><u><a  ng-href="#vehicle/{{vehicle.record_id}}"> {{vehicle.registration_no}}</a></u></td>
+		<td>{{vehicle.permit_no}}</td>
+		<td>{{vehicle.chassis_no}}</td>
+		<td>{{vehicle.engine_no}}</td>
+		<td><u><a  ng-href="#showCompany/{{vehicle.company_id}}"> {{vehicle.company_name}}</u></a></td>
+		
+		<td>{{vehicle.owner}}</td>
+		
+		
+	</tr>
+	
+</tbody>
+</table>
+
+</div>	
+
+	<div class="row" ng-show="NO_RECORD_FOUND">
+	NO RECORD FOUND
+	</div>
+	
+
+		
+   </div>
+</div>
+			

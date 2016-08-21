@@ -1,0 +1,248 @@
+ <div class="row">
+   <div class="col-md-12 col-sm-12 col-xs-12">
+    <form role="form" class="vehicleForm">
+	<button  type="button" class="btn  btn-primary" ng-click="registerVehicle()">Save</button>
+	<div class="panel panel-primary">
+	<div class="panel-heading">
+    <h3 class="panel-title">Company Details </h3>
+	  </div>
+	  <div class="panel-body">
+		
+   
+	   <div>{{vehicle.company_name}}</div>
+	   <div>{{vehicle.company_id}}</div>
+		{{vehicle.record_id }}
+	</div>
+  </div>
+	
+	
+<div class="panel panel-primary">
+	<div class="panel-heading">
+    <h3 class="panel-title">Owner Information </h3>
+	  </div>
+	  <div class="panel-body">
+		 <div class="row">
+	<div class="col-md-6 col-sm-6 col-xs-12">
+	 <input  class=" form-control input-xs" placeholder="owner" type="text" ng-model="vehicle.owner" maxlength="75" > </input> 
+</div>
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+<input  class="form-control input-xs" placeholder="owner_son_of " type="text" ng-model="vehicle.owner_son_of" maxlength="75" > </input>
+</div>
+
+</div>
+
+ <div class="row">
+	<div class="col-md-6 col-sm-6 col-xs-12">
+	 <input  class=" form-control input-xs" placeholder="owner_permanent_address" type="text" ng-model="vehicle.owner_permanent_address" maxlength="75" > </input> 
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+	 <input  class=" form-control input-xs" placeholder="owner_temporary_address" type="text" ng-model="vehicle.owner_temporary_address" maxlength="75" > </input> 
+</div>
+
+
+</div>
+
+	
+	</div>
+ </div>
+ 
+ 
+  <div class="panel panel-primary">
+	<div class="panel-heading">
+    <h3 class="panel-title">Seller/Dealer Information </h3>
+	  </div>
+	  <div class="panel-body">
+	
+<div class="row">
+	<div class="col-md-4 col-sm-4 col-xs-12">
+	 <input  class=" form-control input-xs" placeholder="Seller/Dealer" type="text" ng-model="vehicle.seller" maxlength="75" > </input> 
+</div>
+
+<div class="col-md-4 col-sm-4 col-xs-12">
+<input  class=" form-control input-xs" placeholder="seller address" type="text" ng-model="vehicle.seller_address" maxlength="75" > </input>
+</div>
+
+<div class="col-md-4 col-sm-4 col-xs-12">
+<input  class=" form-control input-xs" placeholder="seller address 1 " type="text" ng-model="vehicle.seller_address1" maxlength="75" > </input>
+</div>
+
+</div>	
+ 
+ 
+  <div class="row">
+	<div class="col-md-4 col-sm-4 col-xs-12">
+	 <input  class=" form-control input-xs" placeholder="seller address 4" type="text" ng-model="vehicle.seller_address2" maxlength="75" > </input> 
+</div>
+
+<div class="col-md-4 col-sm-4 col-xs-12">
+<input  class="form-control input-xs" placeholder="seller address 3" type="text" ng-model="vehicle.seller_address3" maxlength="75" > </input>
+</div>
+
+<div class="col-md-4 col-sm-4 col-xs-12">
+<input  class="form-control input-xs" placeholder="seller address 4 " type="text" ng-model="vehicle.seller_address4" maxlength="75" > </input>
+</div>
+
+</div>
+   
+	
+	</div>
+ </div>
+  
+	<div class="panel panel-primary">
+	<div class="panel-heading">
+	<h3 class="panel-title">Registration Information </h3>
+	</div>
+	<div class="panel-body">
+	<div class="row">
+	<div class="col-md-3 col-sm-3 col-xs-12">
+  <input  class="input-xs" placeholder="State" type="text" ng-model="vehicle.state" maxlength="75" > </input>
+  </div>
+  <div class="col-md-3 col-sm-3 col-xs-12">
+  <input  class=" form-control input-xs" placeholder="Registration No" type="text" ng-model="vehicle.registration_no" maxlength="75" > </input>
+  </div>
+   <div class="col-md-3 col-sm-3 col-xs-12">
+  <input  class=" form-control input-xs" placeholder="Registration Date" type="text" ng-model="vehicle.registration_dt" maxlength="75" > </input>
+  </div>
+   <div class="col-md-3 col-sm-3 col-xs-12">
+  <input  class=" form-control input-xs" placeholder="dt_of_issue" type="text" ng-model="vehicle.dt_of_issue" maxlength="75" > </input>
+  </div>
+	
+	</div>
+	
+	<div class="row">
+	<div class="col-md-3 col-sm-4 col-xs-12">
+  <input  class="input-xs" placeholder="old_registration_dt" type="text" ng-model="vehicle.old_registration_dt" maxlength="75" > </input>
+  </div>
+  <div class="col-md-3 col-sm-4 col-xs-12">
+  <input  class="input-xs" placeholder="old_vehicle_no No" type="text" ng-model="vehicle.old_vehicle_no" maxlength="75" > </input>
+  </div>
+   <div class="col-md-3 col-sm-4 col-xs-12">
+  <input  class="input-xs" placeholder="old_state " type="text" ng-model="vehicle.old_state" maxlength="75" > </input>
+  </div>
+	
+	</div>
+	
+	</div>
+	
+	</div>
+	
+	<!-- VEHICLE SPECTIFICATION START-->
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+	<h3 class="panel-title">Vehicle Specification </h3>
+	</div>
+	<div class="panel-body">
+	<div class="row">
+	<div class="col-md-1 col-sm-1 col-xs-12">
+  <input  class="form-control  input-xs" placeholder="class_of_vehicle" type="text" ng-model="vehicle.class_of_vehicle" maxlength="75" > </input>
+  </div>
+  <div class="col-md-2 col-sm-2 col-xs-12">
+  <input  class=" form-control input-xs" placeholder="makers_name" type="text" ng-model="vehicle.makers_name" maxlength="75" > </input>
+  </div>
+   <div class="col-md-2 col-sm-2 col-xs-12">
+  <input  class=" form-control input-xs" placeholder="type_of_body" type="text" ng-model="vehicle.type_of_body" maxlength="75" > </input>
+  </div>
+   <div class="col-md-1 col-sm-1 col-xs-12">
+  <input  class=" form-control input-xs" placeholder="model" type="text" ng-model="vehicle.model" maxlength="4" > </input>
+  </div>
+	
+	 <div class="col-md-1 col-sm-1 col-xs-12">
+  <input  class=" form-control input-xs" placeholder="no_of_cylinders" type="text" ng-model="vehicle.no_of_cylinders" maxlength="2" > </input>
+  </div>
+  <div class="col-md-1 col-sm-1 col-xs-12">
+  <input  class=" form-control input-xs" placeholder="fuel" type="text" ng-model="vehicle.fuel" maxlength="10" > </input>
+  </div>
+  <div class="col-md-2 col-sm-2 col-xs-12">
+  <input  class=" form-control input-xs" placeholder="cubic_capacity" type="text" ng-model="vehicle.cubic_capacity" maxlength="10" > </input>
+  </div>
+  
+	</div>
+	
+	<div class="row">
+	<div class="col-md-3 col-sm-4 col-xs-12">
+  <input  class="form-control  input-xs" placeholder="old_registration_dt" type="text" ng-model="vehicle.old_registration_dt" maxlength="75" > </input>
+  </div>
+  <div class="col-md-3 col-sm-4 col-xs-12">
+  <input  class=" form-control input-xs" placeholder="old_vehicle_no No" type="text" ng-model="vehicle.old_vehicle_no" maxlength="75" > </input>
+  </div>
+   <div class="col-md-3 col-sm-4 col-xs-12">
+  <input  class="form-control  input-xs" placeholder="old_state " type="text" ng-model="vehicle.old_state" maxlength="75" > </input>
+  </div>
+	
+	</div>
+	
+	</div>
+	
+	</div>
+<!-- VEHICLE SPECTIFICATION END-->
+	
+	<!-- LIST VIEW ROW START -->
+	
+	</form>
+	<div class="row">
+	<div class="col-md-3 col-sm-3 col-xs-12">
+<div class="panel panel-primary">
+	
+	<div class="panel-body">
+	<label>Tax Payments</label>
+	<button  type="button" ng-click="showAllTaxPayments()">List</button>
+	<!-- <button  type="button"  data-toggle="modal" data-target="#taxModal">New</button> -->
+	<button  type="button" ng-click="newTaxPayment()">New</button>
+	
+	</div>
+	</div>
+	
+	</div>
+	<div class="col-md-3 col-sm-3 col-xs-12">
+<div class="panel panel-danger">
+	
+	<div class="panel-body">
+	<label>Fitness Certs.</label>
+	<button  type="button" ng-click="showAllTaxPayment()">List</button>
+	<button  type="button"  ng-click="NewTaxPayment()">New</button>
+	</div>
+	</div>
+	
+	</div>
+	<div class="col-md-3 col-sm-3 col-xs-12">
+<div class="panel panel-primary">
+	
+	<div class="panel-body">
+	<label>Temp Permit</label>
+	<button  type="button" ng-click="showAllTaxPayment()">List</button>
+	<button  type="button"  ng-click="NewTaxPayment()">New</button>
+	</div>
+	</div>
+	
+	</div>
+	
+	<div class="col-md-3 col-sm-3 col-xs-12">
+<div class="panel panel-primary">
+	
+	<div class="panel-body">
+	<label>National Permit</label>
+	<button  type="button" ng-click="showAllTaxPayment()">List</button>
+	<button  type="button"  ng-click="NewTaxPayment()">New</button>
+	</div>
+	</div>
+	
+	</div>
+	
+	</div> <!-- LIST VIEW ROW END -->
+	
+	<!-- TAX LIST ROW START -->
+	<div ng-show='listForView == "tax"'>
+	<tax-list></tax-list>
+	</div>
+	<!-- LIST VIEW ROW END -->
+	<!-- TAX MODAL START -->
+	<div >
+	<tax-modal></tax-modal>
+	</div>
+	<!-- TAX MODAL  END -->
+		
+   </div>
+</div>
+			

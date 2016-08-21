@@ -1,0 +1,61 @@
+ <div class="row">
+   <div class="col-md-12 col-sm-12 col-xs-12">
+<div  class="row">
+<h4>Search Vehicle</h4>
+</div>
+
+<div  class="row">
+<label>Search By - </label>  
+
+<select  class="input-xs" ng-model="criteria" ng-init = "criteria = '1'">
+      <option value="1" selected="selected">Registration No</option>
+      <option value="2" >Permit No</option>
+	  <option value="3" >Company Name</option>
+    </select>
+	
+  
+<input  class="input-xs"  type="text" ng-model="txt" maxlength="25" size="14"> </input> 
+ <button  type="button" class="btn   btn-primary" ng-click="searchVehicle()">Go</button> 
+	
+</div>
+
+
+
+<div class="row" ng-show="vehiclesList.length">
+<table class="table table-striped table-bordered jambo_table">
+<thead>
+<tr>
+		<th>ID</th>
+		<th>Reg No</th>
+		<th>Permit No</th>
+		<th>Company</th>
+		<th>Owner</th>
+
+</tr>
+</thead>
+<tbody>
+<tr  ng-repeat="vehicle in vehiclesList">
+		<td><u><a  ng-href="#vehicle/{{vehicle.record_id}}"> {{vehicle.record_id}}</a></u></td>
+		<td>{{vehicle.registration_no}}</td>
+		<td>{{vehicle.permit_no}}</td>
+		<td><u><a  ng-href="#showCompany/{{vehicle.company_id}}"> {{vehicle.company_name}}</u></a></td>
+		
+		<td>{{vehicle.owner}}</td>
+		
+		
+	</tr>
+	
+</tbody>
+</table>
+
+</div>	
+
+	<div class="row" ng-show="NO_RECORD_FOUND">
+	NO RECORD FOUND
+	</div>
+	
+
+		
+   </div>
+</div>
+			

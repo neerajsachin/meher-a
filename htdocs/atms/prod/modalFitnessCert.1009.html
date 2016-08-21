@@ -1,0 +1,58 @@
+
+<div class="modal fade" id="fitnessModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+	   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  <h4 class="modal-title" id="myModalLabel">Fitness Certificate <span ng-show="fitnessCertCurrent.fitness_cert_id"> (Record ID: {{fitnessCertCurrent.fitness_cert_id}})</span></h4>
+      
+       
+      </div>
+      <div class="modal-body">
+	  <label>Period From:</label>
+	   <input  class="input-xs"    type="date" ng-model="fitnessCertCurrent.from_date" maxlength="10" size="10" ng-disabled="!editModeFitnessCert" > </input>
+     <label>To:</label> 
+	 
+	 <input  class="input-xs"    type="date" ng-model="fitnessCertCurrent.to_date" maxlength="10" size="10" ng-disabled="!editModeFitnessCert" > </input>
+       	
+	  <br></br>
+	  <label>Receipt No.:</label><input  class="input-xs"  type="text" ng-model="fitnessCertCurrent.receipt_no" maxlength="75" ng-disabled="!editModeFitnessCert"> </input>
+	  <label>Issue Dt.:</label> <input  class="input-xs"    type="date" ng-model="fitnessCertCurrent.issue_dt" maxlength="10" size="10" ng-disabled="!editModeFitnessCert" > </input>
+	  <br></br>
+	  <label>Amount:</label><input  class="input-xs" type="text" ng-model="fitnessCertCurrent.amount" ng-disabled="!editModeFitnessCert" > </input>
+	  <br></br>
+	  <label>Remark:</label><textarea  class="input-xs"   ng-model="fitnessCertCurrent.remarks"  ng-disabled="!editModeFitnessCert"> </textarea>
+	  <br></br>
+	  <label>Authority:</label>
+	  <span>{{fitnessCertCurrent.authority}}</span>
+	  <!-- <select  class="input-xs" ng-disabled="!editModeFitnessCert" ng-model="fitnessCertCurrent.authority" ng-init = "fitnessCertCurrent.authority = 'Nagaland'">
+      <option value="Assam">Assam</option>
+      <option value="Nagaland" selected="selected">Nagaland</option>
+    </select> -->
+	
+	  <!-- <label>District:</label><input  class="input-xs" type="text" ng-model="fitnessCertCurrent.district" ng-disabled="!editModeFitnessCert" > </input> -->
+	   <br></br>
+	  <label>CF Issued:</label><!-- <input  class="input-xs"  type="text" ng-model="fitnessCertCurrent.authority"  > </input> -->
+	  
+	  <select  class="input-xs" ng-disabled="!editModeFitnessCert" ng-model="fitnessCertCurrent.cf_issued" ng-init = "fitnessCertCurrent.cf_issued = 'Y'">
+      <option value="Y">Y</option>
+      <option value="N" selected="selected">N</option>
+    </select>
+	  
+	  <label>Application Date:</label>
+	  <input  class="input-xs"    type="date" ng-model="fitnessCertCurrent.apply_dt" maxlength="10" size="10" ng-disabled="!editModeFitnessCert" > </input>
+	  
+	  <br></br>
+
+	 	 <span class="red" ng-show="modalFitnessCertShowError">{{modalFitnessCertErrorMsg}}</span>
+	  <br></br>
+
+	  <button ng-show = "editModeFitnessCert" type="button" class="btn btn-default" ng-click="saveFitenssCert()">Save</button>
+	  <button ng-show = "!editModeFitnessCert" type="button" class="btn btn-default" ng-click="editModeFitnessCert = true">Edit</button>
+	  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	  </div>
+	  </div>
+     
+    </div>
+  </div>
+</div>

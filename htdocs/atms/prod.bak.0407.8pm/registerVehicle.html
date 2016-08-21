@@ -1,0 +1,452 @@
+ <div class="row">
+   <form role="form" class="vehicleForm form-inline">
+   <div class="col-md-12 col-sm-12 col-xs-12">
+   <div class="row">
+   <div class="col-md-6 col-sm-6 col-xs-6">
+   <button  ng-show= "editMode" type="button" class="btn  btn-primary" ng-click="registerVehicle()">Save</button> 
+	<button ng-show= "!editMode" type="button" class="btn  btn-primary" ng-click="editMode = true;showSuccessMsg=false">Edit</button> 
+
+	<button ng-show = "!editMode" type="button" class="btn btn-warning" ng-click="cloneVehicle()">Clone</button>
+
+	<button ng-show= "editMode && vehicle.record_id"  type="button" class="btn  btn-primary" ng-click="editMode = false">Cancel</button>
+	<span ng-show="showErrMsg" style ="color:red;">{{errMsg}}</span>
+	<span ng-show="duplicateList" style ="color:red;">
+	 Duplicate engine or chassis found
+	<table class="table table-striped table-bordered jambo_table">
+<thead>
+	<tr>
+		<th>Record id</th>
+		<th>Reg No.</th>
+		<th>Chassis No.</th>
+		<th>Engine No.</th>
+		
+	</tr>
+</thead>
+<tbody>
+	<tr  ng-repeat="dupVehicle in duplicateList" >
+		
+		<td>{{dupVehicle.record_id}}</td>
+		<td>{{dupVehicle.registration_no}}</td>
+		<td>{{dupVehicle.chassis_no}}</td>
+		 <td>{{dupVehicle.engine_no}}</td> 
+		
+	</tr>
+	</tbody>
+  </table>
+	
+	</span>
+	<span ng-show="showSuccessMsg" style ="color:green;">{{successMsg}}</span>
+   </div>
+   <div class="col-md-6 col-sm-6 col-xs-6">
+    <div class="col-md-6 col-sm-6 col-xs-6">
+	<span ng-show= "vehicle.registration_no">Reg No.: {{vehicle.registration_no }}</span>
+	
+	</div>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+	 <span ng-show= "vehicle.record_id">Record ID: {{vehicle.record_id }}</span>  
+	 <div class="btn-group" ng-show= "vehicle.record_id">
+        <button   type="button" class="btn  btn-warning" ng-click="printForm( '20')">20</button>
+		
+		<button   type="button" class="btn  btn-success" ng-click="printForm('27')">27</button>
+		<button   type="button" class="btn  btn-danger" ng-click="printForm('33')">33</button>
+		
+      </div>
+	
+	</div>
+   
+      </div>
+   </div>
+       
+	 
+	<hr style="border-color:blue; margin:7px;"></hr>	
+	<div class = "row" >
+	 <h4 align="center">Company Details </h4>
+	<div class="col-md-4 col-sm-4 col-xs-6">
+	 <label>Name:</label>	
+   <span><u><a  ng-href="#showCompany/{{vehicle.company_id}}" >{{vehicle.company_name}}</u></a></span>
+   <!-- <input  class="  input-xs"  type="text"  ng-model="vehicle.company_name" maxlength="75" size="35" disabled> </input>  -->
+	</div>
+	<div class="col-md-4 col-sm-4 col-xs-6">
+	 <label>ID:</label>
+   <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.company_id" maxlength="75" size="6"> </input> 
+    <button  ng-disabled="!editMode" type="button" class="btn btn-xs btn-danger" ng-click="getCompany()">Go</button> 
+	 <span ng-show= "NO_COMPANY_FOUND" class="red" >No Company Found, Try Again !!</span>
+	</div>
+	<div class="clearfix"></div>
+	
+    	
+	</div>
+	
+
+
+     
+			 <hr style="border-color:blue; margin:7px;"></hr>
+			 <h4 align="center"> Owner Information </h4>
+	 	 	 <div class="row">
+		 <label>Name:</label>
+	 <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.owner" maxlength="75" size="35"> </input> 
+<label>Son of:</label>
+<input  class=" input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.owner_son_of" maxlength="75" size="35"> </input>
+</div>
+ <div class="row">
+<label>Perm. Addrs.:</label>
+ <textarea  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.owner_permanent_address" rows="4"> </textarea>
+ <label>Temp. Addrs.:</label>
+  <textarea  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.owner_temporary_address" rows="4" > </textarea> 
+</div>
+<hr style="border-color:blue; margin:7px;"></hr>
+    <h4 align="center">Seller/Dealer Information</h4>	
+		 
+	
+<div class="row">
+	<label>Name:</label>
+	 <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.seller" maxlength="75" > </input> 
+<label>Address:</label>
+<textarea  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.seller_address1" rows="4" maxlength="150" > </textarea>
+</div>	
+   <hr style="border-color:blue; margin:7px;"></hr>
+	<h4 align="center">Registration Information </h4>
+	
+	<div class="row">
+	<label>State:</label>
+  <!-- <input  class="input-xs" type="text" ng-disabled="!editMode" ng-model="vehicle.state" maxlength="75" > </input> -->
+  <select  class="input-xs" ng-disabled="!editMode" ng-model="vehicle.state" >
+      <option value="ASSAM">ASSAM</option>
+      <option value="NAGALAND" selected="selected">NAGALAND</option>
+    </select>
+  
+  <label>Reg No.:</label>
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.registration_no" maxlength="75" > </input>
+  
+  <label>Reg. Dt.:</label>
+  <!-- <input  class="  input-xs"  type="date" ng-disabled="!editMode" ng-model="vehicle.registration_dt" maxlength="10" size="10" > </input>  -->
+  
+  <!-- <span class="input-group">
+  <input  class="input-xs"  uib-datepicker-popup="{{dateFormat}}" is-open="regDtPop" datepicker-options="dateOptions" close-text="Close"  type="text" ng-model="vehicle.registration_dt" maxlength="10" size="10" ng-disabled="!editMode" > </input>
+  <span class="input-group-btn">
+            <button type="button" class="btn  btn-xs" ng-click="openRegDtPop()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+	</span>	 -->
+	<input  class="input-xs"    type="date" ng-model="vehicle.registration_dt" maxlength="10" size="10" ng-disabled="!editMode" > </input>
+<label>Issue Dt.:</label>
+	<input  class="input-xs"    type="date" ng-model="vehicle.dt_of_issue" maxlength="10" size="10" ng-disabled="!editMode" > </input>
+	
+<label>Permit No.:</label>
+	<input  class="input-xs"    type="text" ng-model="vehicle.permit_no" maxlength="45" size="15" ng-disabled="!editMode" > </input>	
+<span class="input-group">
+
+  <!--<input  class="input-xs"  uib-datepicker-popup="{{dateFormat}}" is-open="issueDtPop" datepicker-options="dateOptions" close-text="Close"  type="date" ng-model="vehicle.dt_of_issue1" maxlength="10" size="10" ng-disabled="!editMode" > </input> -->
+  
+  <!-- <span class="input-group-btn">
+            <button type="button" class="btn  btn-xs" ng-click="openIssueDtPop()"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+	</span>	  -->
+  
+   
+	</div>
+	
+	<div class="row">
+<label>Old State:</label>
+
+	<input  class="input-xs" type="text" ng-disabled="!editMode" ng-model="vehicle.old_state" maxlength="75" > </input>
+
+<label>Old Vehicle No.:</label>
+  <input  class="input-xs" type="text" ng-disabled="!editMode" ng-model="vehicle.old_vehicle_no" maxlength="75" > </input>
+
+	<label>Old Reg. Dt.:</label>
+  
+  <input  class="input-xs"    type="date" ng-model="vehicle.old_registration_dt" maxlength="10" size="10"   ng-disabled="!editMode" > </input>
+  <!-- <input  class="input-xs" type="text" ng-disabled="!editMode" ng-model="vehicle.old_state" maxlength="75" > </input> -->
+  
+	</div>
+	<div class="row">
+
+<label>Vehicle Description:</label>
+<textarea  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.vehicle_description" maxlength="75" > </textarea>
+	<label>NOC:</label>
+<select  class="input-xs" ng-disabled="!editMode" ng-model="vehicle.noc">
+      <option value="" selected="selected"></option>
+      <option value="YES" >YES</option>
+    </select>	
+	<!-- <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.noc" maxlength="4" size="3" > </input> -->
+	 <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-show="vehicle.noc == 'YES'" ng-model="vehicle.noc_remark" maxlength="40" > </input> 
+</div>
+	
+	<div class="row">
+
+<label>Hire Purchase Details:</label>
+<textarea  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.hire_purchase_details" maxlength="75" > </textarea>
+	<label>Tax Paid Upto (in register):</label>
+	 <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.tax_paid_upto" maxlength="75" > </input> 
+	 <label>Insurance Up to :</label>
+	 <input  class="  input-xs"  type="date" ng-disabled="!editMode" ng-model="vehicle.insurance_upto" maxlength="10" > </input> 
+</div>
+
+
+	
+	
+	<!-- VEHICLE SPECTIFICATION START-->
+<hr style="border-color:blue; margin:7px;"></hr>
+
+	<h4 align="center">Vehicle Specification </h4>
+
+	<!--<div class="row">
+	<div class="col-md-6 col-sm-6 col-xs-12">
+	<table>
+	<tbody>
+	<tr>
+	<td>
+	<label>Class:</label>	
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.class_of_vehicle" maxlength="75" > </input>
+  <label>Public/Private:</label>	
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.public_private" maxlength="75" > </input>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	</div>
+	
+	<div class="col-md-6 col-sm-6 col-xs-12">
+	<table>
+	<tbody>
+	<tr>
+	<td>
+	
+  <label>Public/Private:</label>	
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.public_private" maxlength="75" > </input>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	</div>
+	
+		</div> -->
+		
+		<div class="row">
+	<div class="col-md-6 col-sm-6 col-xs-12">
+	<div class="panel panel-danger">
+  <div class="panel-body">
+	<div class="row">
+	<label>Class:</label>	
+  <!--- <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.class_of_vehicle" maxlength="75" > </input> -->
+  <select  class="input-xs" ng-disabled="!editMode" ng-model="vehicle.class_of_vehicle" >
+      <option value="LMV">LMV</option>
+      <option value="MMV" selected="selected">MMV</option>
+	  <option value="HGV" selected="selected">HGV</option>
+	  <option value="NON TRANSPORT" selected="selected">NON TRANSPORT</option>
+	  <option value="M/C" selected="selected">M/C</option>
+    </select>
+  
+  <label>Public/Private:</label>	
+  <!-- <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.public_private" maxlength="75" > </input> -->
+  <select  class="input-xs" ng-disabled="!editMode" ng-model="vehicle.public_private">
+      <option value="PUBLIC">PUBLIC</option>
+      <option value="PRIVATE">PRIVATE</option>
+    </select>
+  
+  
+	</div>
+	<div class="row">
+	<label>Maker:</label>
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.makers_name" maxlength="75" > </input>
+  
+   <label>Body Type:</label>
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.type_of_body" maxlength="75" > </input>
+	</div>
+	<div class="row">
+	<label>Yr/Month of Manufacture:</label> 
+  <input  class="  input-xs"  placeholder = "e.g 2016(YYYY)" type="text" ng-disabled="!editMode" ng-model="vehicle.model" maxlength="4" > </input>
+  
+	</div>
+	<div class="row">
+	<label>Chassis No:</label> 
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.chassis_no" maxlength="50" > </input>
+  <label>Engine No:</label> 
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.engine_no" maxlength="50" > </input>
+  </div>
+	<div class="row">
+  <label>Trailor Chassis No:</label> 
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.trailor_chassis_no" maxlength="50" > </input>
+	</div>
+	
+	
+	
+	
+  
+  <div class="row">
+  <label>Seating Capacity:</label> 
+  <input  class="  input-xs"  type="number" ng-disabled="!editMode" ng-model="vehicle.seating_capacity" maxlength="10" > </input>
+  <label>Colour:</label> 
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.color" maxlength="10" > </input>
+  </div>
+  
+  <div class="row">
+  <label>Unladen Weight:</label> 
+  <input  class="  input-xs"  type="number" ng-disabled="!editMode" ng-model="vehicle.unladen_weight " maxlength="10" > </input>
+  <label>Payload:</label> 
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.payload" maxlength="10" > </input>
+  </div>
+  </div>
+  	</div>
+  	</div>
+	
+	<div class="col-md-6 col-sm-6 col-xs-12 ">
+	<div class="panel panel-danger">
+  <div class="panel-body">
+ 
+	<div class="row">
+	<label>Horse Power:</label>	
+  <input  class="  input-xs"  type="number" ng-disabled="!editMode" ng-model="vehicle.hp" maxlength="3" > </input>
+  <label>Gross Weight (Reg):</label>	
+  <input  class="  input-xs"  type="number" ng-disabled="!editMode" ng-model="vehicle.gross_vehicle_wt_reg" maxlength="5" size="5" > </input>
+	</div>
+	<div class="row">
+  <label>No. of Cylinders:</label> 
+  <input  class="  input-xs" type="number" ng-disabled="!editMode" ng-model="vehicle.no_of_cylinders" maxlength="2" > </input>
+    <label>Fuel:</label> 
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.fuel" maxlength="10" > </input>
+  </div>
+  <div class="row">
+  <label>Cube Capacity:</label> 
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.cubic_capacity" maxlength="10" > </input>
+  <label>Wheel Base:</label> 
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.wheel_base" maxlength="10" > </input>
+  </div>
+	<div class="row">
+	<label>Front Axle:</label>	
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.front_axle" maxlength="75" > </input>
+  <label>Rear Axle:</label>	
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.rear_axle" maxlength="75" > </input>
+	
+	</div>
+	
+	<div class="row">
+	<label>Any Other Axle:</label>	
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.any_other_axle" maxlength="75" > </input>
+  <label>Tandem Axle:</label>	
+  <input  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.tandem_axle" maxlength="75" > </input>
+	
+	</div>
+	<div class="row">
+	<label>Gross Weight(Manufacture):</label>	
+  <input  class="  input-xs"  type="number" ng-disabled="!editMode" ng-model="vehicle.gross_vehicle_wt_manf" maxlength="75" > </input>
+ 	
+	</div>
+	
+	<div class="row">
+
+<label>Remarks:</label>
+<textarea  class="  input-xs"  type="text" ng-disabled="!editMode" ng-model="vehicle.remarks" maxlength="75" > </textarea>
+	
+</div>
+	</div>
+	
+	</div>
+	</div>
+	
+	</div>
+
+		
+	
+<!-- VEHICLE SPECTIFICATION END-->
+	
+	<!-- LIST VIEW ROW START -->
+	
+	</form>
+	<hr style="border-color:blue; margin:7px; border:solid 2px ; "></hr>
+	
+
+	
+	
+	<div class="row" ng-show="vehicle.record_id">
+	<div class="col-md-3 col-sm-3 col-xs-12">
+<div class="panel panel-primary">
+	
+	<div class="panel-body">
+	<label>Tax Payments</label>
+	<button  type="button" ng-click="showAllTaxPayments()">List</button>
+	<!-- <button  type="button"  data-toggle="modal" data-target="#taxModal">New</button> -->
+	<button  type="button" ng-click="newTaxPayment()">New</button>
+	
+	</div>
+	</div>
+	
+	</div>
+	<div class="col-md-3 col-sm-3 col-xs-12">
+<div class="panel panel-danger">
+	
+	<div class="panel-body">
+	<label>Fitness Certs.</label>
+	<button  type="button" ng-click="showAllFitnessCerts()">List</button>
+	<button  type="button"  ng-click="newFitnessCert()">New</button>
+	</div>
+	</div>
+	
+	</div>
+	<div class="col-md-3 col-sm-3 col-xs-12">
+<div class="panel panel-primary">
+	
+	<div class="panel-body">
+	<label>Temp Permit</label>
+	<button  type="button" ng-click="showAllTempPermits()">List</button>
+	<button  type="button"  ng-click="newTempPermit()">New</button>
+	</div>
+	</div>
+	
+	</div>
+	
+	<div class="col-md-3 col-sm-3 col-xs-12">
+<div class="panel panel-primary">
+	
+	<div class="panel-body">
+	<label>National Permit</label>
+	<button  type="button" ng-click="showAllNationalPermits()">List</button>
+	<button  type="button"  ng-click="newNationalPermit()">New</button>
+	</div>
+	</div>
+	
+	</div>
+	
+	</div> <!-- LIST VIEW ROW END -->
+	
+	<!-- TAX LIST ROW START -->
+	<div ng-show='listForView == "tax"'>
+	<tax-list></tax-list>
+	</div>
+	<!-- LIST VIEW ROW END -->
+	<!-- TAX MODAL START -->
+	<div >	<tax-modal></tax-modal>	</div>
+	<!-- TAX MODAL  END -->
+	
+<!-- FITNESS LIST ROW START -->
+	<div ng-show='listForView == "fitness"'>
+	<fitness-list></fitness-list>
+	</div>
+	<!-- LIST VIEW ROW END -->
+	<!-- FITNESS MODAL START -->
+	<div >	<fitness-modal></fitness-modal>	</div>
+	<!-- FITNESS MODAL  END -->
+
+		
+<!-- TEMP PERMIT LIST ROW START -->
+	<div ng-show='listForView == "tempPermit"'>
+	<temp-permit-list></temp-permit-list>
+	</div>
+	<!-- LIST VIEW ROW END -->
+	<!-- TEMP PERMIT MODAL START -->
+	<div >	<temp-permit-modal></temp-permit-modal>	</div>
+	<!-- TEMP PERMIT MODAL  END -->
+	
+<!-- NATIONAL PERMIT LIST ROW START -->
+	<div ng-show='listForView == "nationalPermit"'>
+	<national-permit-list></national-permit-list>
+	</div>
+	<!-- LIST VIEW ROW END -->
+	<!-- NATIONAL PERMIT MODAL START -->
+	<div >	<national-permit-modal></national-permit-modal>	</div>
+	<!-- NATIONAL PERMIT MODAL  END -->
+
+
+	</div>
+</div>
+			

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="atmsApp">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ATMS</title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- iCheck -->
+
+	<link href="tp/ui-bootstrap-custom-1.3.3-csp.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="css/custom.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md" ng-controller="_mainCtrl_">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+           
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile">
+              <div class="profile_pic">
+                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Welcome,</span>
+                <h2>Sachin</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3></h3>
+                <ul class="nav">
+				<li>Company</li>
+				<li><a href="#showCompany/00" style="color:white;">New Company</a></li>
+				<li><a href="#searchCompany" style="color:white;">Search Company</a></li>
+				</ul>
+				<ul class="nav">
+				<li>Vehicle</li>
+				<li><a href="#vehicle/00" style="color:white;">New Vehicle</a></li>
+                <li><a href="#searchVehicle" style="color:white;">Search Vehicle</a></li>
+				</ul>
+				<!-- <ul class="nav side-menu">
+                   <li><a><i class="fa fa-building"></i> Company <span class="fa fa-chevron-down"></span></a> 
+                    <ul class="nav child_menu">
+                      <li><a href="#showCompany/00">New Company</a>
+                      </li>
+                      <li><a href="#searchCompany">Search Company</a></li>
+                     
+                    </ul>
+                   </li> 
+				  <li><a><i class="fa fa-truck"></i> Vehicle <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="#vehicle/00">New Vehicle</a></li>
+                      <li><a href="#searchVehicle">Search Vehicle</a></li>
+                     
+                    </ul>
+                  </li>
+				  </ul> -->
+              </div>
+
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+
+          <div class="nav_menu">
+            <nav class="" role="navigation">
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+			  <ul class="nav navbar-nav navbar-left">
+			  	<li class=""><a href="#showCompany/00" style="color:white;">New Company</a></li>
+				<li class=""><a href="#searchCompany" style="color:white;">Search Company</a></li>
+                <li class=""><a href="#vehicle/00" style="color:white;">New Vehicle</a></li>
+                <li class=""><a href="#searchVehicle" style="color:white;">Search Vehicle</a></li>
+
+
+           
+              
+                <li class="pull-right">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    Sachin  <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="javascript:;">  Profile</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">
+                        <span class="badge bg-red pull-right">50%</span>
+                        <span>Settings</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">Help</a>
+                    </li>
+                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                    </li>
+                  </ul>
+                </li>
+   </ul>
+
+              
+            </nav>
+          </div>
+
+        </div>
+        <!-- /top navigation -->
+
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+		<div ng-view></div>
+</div>
+
+      </div>
+    </div>
+
+   <script src="../vendors/jquery/dist/jquery.min.js"></script> 
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script> -->
+	
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>    -->
+   <script src="../vendors/angularjs/angular.min.js"></script> 
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script> -->
+<script src="../vendors/angularjs/angular-route.min.js"></script> 
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script> -->
+<script src="../vendors/angularjs/angular-animate.js"></script> 
+<!--- <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script> -->
+ <script src="../vendors/angularjs/ui-bootstrap-tpls-1.3.3.min.js"></script> <!--FULL VERSION OF UI BOOTSTRAP  -->
+    <!-- jQuery -->
+
+    
+	
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../vendors/moment/moment.min.js"></script>
+   
+    <!-- Custom Theme Scripts -->
+    <script src="js/custom.js"></script>
+	
+	<script src="ng/mainController.js"></script>
+	<script src="ng/accountController.js"></script>
+	<script src="ng/vehicleController.js"></script>
+	<script src="ng/searchCompanyController.js"></script>
+	<script src="ng/searchVehicleController.js"></script>
+  <script src="ng/services.js"></script>
+	
+	<script src="ng/factory/companyFactory.js"></script>
+	<script src="ng/factory/vehicleFactory.js"></script>
+	<script src="ng/factory/taxPaymentFactory.js"></script>
+	<script src="ng/factory/fitnessCertFactory.js"></script>
+	<script src="ng/factory/tempPermitFactory.js"></script>
+	<script src="ng/factory/nationalPermitFactory.js"></script>
+	<script src="config/config.js"></script>
+	
+	<!-- DATE PICKER-->
+<!-- <script src="ui-bootstrap-custom-1.3.3.min.js"></script> -->
+<!-- <script src="ui-bootstrap-tpls-1.3.3.min.js"></script> -->
+<script src="../vendors/jsPDF/jspdf.debug.js"></script>
+    <script src="js/printUtil.js"></script> 
+	
+
+	<script src="../vendors/pdfmake/pdfmake.min.js"></script>
+	<script src="js/vfs_fonts.js"></script>
+	<script src="js/printForm20.js"></script>
+	<script src="js/printForm24.js"></script>
+	<script src="js/printForm27.js"></script>
+	<script src="js/printForm28.js"></script>
+	<script src="js/printForm33.js"></script>
+	<script src="js/printFormGNP.js"></script>
+	<script src="js/printVehicleForms.js"></script>
+
+	
+    <!-- Flot -->
+   
+
+   
+
+    <!-- Skycons -->
+    
+   
+    
+    <!-- bootstrap-daterangepicker -->
+    
+  </body>
+</html>

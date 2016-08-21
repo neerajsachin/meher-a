@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="atmsApp">
+  <head>
+<!-- SOURCE https://colorlib.com/polygon/gentelella/index.html -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ATMS</title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- iCheck -->
+
+	<link href="tp/ui-bootstrap-custom-1.3.3-csp.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <!-- <link href="css/custom.css" rel="stylesheet"> -->
+	<link href="css/custom2.css" rel="stylesheet"> 
+	    <link href="../vendors/ngtable/ng-table.min.css" rel="stylesheet">
+  </head>
+
+  <body  ng-controller="_mainCtrl_">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+	 <div class="container-fluid">
+	 <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  </div>
+     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+       
+<li><a href="#showCompany/00" >New Company<span class="sr-only">(current)</span></a></li>
+<li><a href="#searchCompany" >Search Company</a></li>
+<li><a href="#vehicle/00" >New Vehicle</a></li>
+<li><a href="#searchVehicle" >Search Vehicle</a></li>
+     
+        <li class="dropdown">
+          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Work Orders <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#woListTax" >Tax Payment</a></li>
+            <li role="separator" class="divider"></li>
+			<li><a href="#woListCF" >Fitness Certs</a></li>
+			<li role="separator" class="divider"></li>
+			<li><a href="#woListNP" >National Permit</a></li>
+            
+          </ul>
+        </li>
+		 <li class="dropdown">
+          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ProActive Biz. <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#globalDVP" >Global DVP</a></li>
+            <!-- <li role="separator" class="divider"></li> -->
+			<!-- <li><a href="#" >InActive Customers</a></li> -->
+			
+            
+          </ul>
+        </li>
+      </ul>
+      <!-- <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search NOT FUNCTIONAL ">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form> -->
+      <!-- <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul> -->
+    </div>
+    </div>
+	 </div>
+	</nav>
+	<div class="container-fluid">
+	<div ng-view></div>
+	
+	</div>
+
+   <script src="../vendors/jquery/dist/jquery.min.js"></script> 
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script> -->
+	
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>    -->
+   <script src="../vendors/angularjs/angular.min.js"></script> 
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script> -->
+<script src="../vendors/angularjs/angular-route.min.js"></script> 
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script> -->
+<script src="../vendors/angularjs/angular-animate.js"></script> 
+<!--- <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script> -->
+ <script src="../vendors/angularjs/ui-bootstrap-tpls-1.3.3.min.js"></script> <!--FULL VERSION OF UI BOOTSTRAP  -->
+    <!-- jQuery -->
+
+    
+	
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../vendors/moment/moment.min.js"></script>
+	<script src="../vendors/papaparse/papaparse.min.js"></script>
+	<script src="../vendors/ngtable/ng-table.min.js"></script>
+   
+   
+    <!-- Custom Theme Scripts -->
+    <script src="js/custom.js"></script>
+	<script src="js/downloadDocs.js"></script>
+	
+	<script src="ng/mainController.js"></script>
+	<script src="ng/accountController.js"></script>
+	<script src="ng/vehicleController.js"></script>
+	<script src="ng/searchCompanyController.js"></script>
+	<script src="ng/searchVehicleController.js"></script>
+	<script src="ng/woListTaxPaymentCtrl.js"></script>
+	<script src="ng/woListCFCtrl.js"></script>
+	<script src="ng/woListNPCtrl.js"></script>
+	<script src="ng/globalDVPCtrl.js"></script>
+	
+	
+  <script src="ng/services.js"></script>
+	
+	<script src="ng/factory/companyFactory.js"></script>
+	<script src="ng/factory/vehicleFactory.js"></script>
+	<script src="ng/factory/taxPaymentFactory.js"></script>
+	<script src="ng/factory/fitnessCertFactory.js"></script>
+	<script src="ng/factory/tempPermitFactory.js"></script>
+	<script src="ng/factory/nationalPermitFactory.js"></script>
+	<script src="ng/factory/commonFactory.js"></script>
+	<script src="config/config.js"></script>
+	
+	<!-- DATE PICKER-->
+<!-- <script src="ui-bootstrap-custom-1.3.3.min.js"></script> -->
+<!-- <script src="ui-bootstrap-tpls-1.3.3.min.js"></script> -->
+
+<script src="../vendors/jsPDF/jspdf.debug.js"></script>
+    <script src="js/printUtil.js"></script> 
+	
+
+	<script src="../vendors/pdfmake/pdfmake.min.js"></script>
+	<script src="js/vfs_fonts.js"></script>
+	<script src="js/printForm20.js"></script>
+	<script src="js/printForm24.js"></script>
+	<script src="js/printForm27.js"></script>
+	<script src="js/printForm28.js"></script>
+	<script src="js/printForm33.js"></script>
+	<script src="js/printFormGNP.js"></script>
+	<script src="js/print/printDVP.js"></script>
+	<script src="js/printVehicleForms.js"></script>
+
+	
+    <!-- Flot -->
+   
+
+   
+
+    <!-- Skycons -->
+    
+   
+    
+    <!-- bootstrap-daterangepicker -->
+    
+  </body>
+</html>

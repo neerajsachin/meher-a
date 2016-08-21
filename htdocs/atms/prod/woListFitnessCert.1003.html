@@ -1,0 +1,88 @@
+ <div class="row">
+   <div class="col-md-12 col-sm-12 col-xs-12">
+<div  class="row">
+<h4>Work Order - Fitness Ceritificates</h4>
+</div>
+
+<div  class="row">
+  <form  name="woCFForm">
+<label> From: </label>
+  <input  class="input-xs"  type="date" ng-model="woCFFromDate" required> </input> 
+
+<label> To: </label>
+  <input  class="input-xs"  type="date" ng-model="woCFToDate" required> </input> 
+
+  <button  type="button" class="btn   btn-warning" ng-click="searchWOCF('ApplyDate')">By Application Date</button> 
+  <button  type="button" class="btn   btn-success" ng-click="searchWOCF('IssueDate')">By Issue Date</button> 
+  
+  
+ </form>
+	
+	<span  ng-hide= "localSearch.registration_no || woCFList.length ==0" class="pull-right"><button  type="submit" class="btn   btn-primary" ng-click="saveAllWOCF()">Save All</button> </span>
+</div>
+<div  class="row">
+<span class="red" ng-show="errMsg">{{errMsg}}</span>
+</div>
+<div class="row" ng-show="woCFList.length">
+<table class="table table-condensed table-striped table-bordered jambo_table" >
+<thead>
+<tr>
+		<th>ID</th>
+		<th>Reg No.</th>
+		<th>Apply Dt.</th>
+		<th>Exp Dt.</th>
+		<th>Amount </th>
+		<th>Receipt No.</th>
+		<th>Issue Dt.</th>
+		<th></th>
+		
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td >  <input type="text"  ng-model="localSearch.registration_no" placeholder = "Advance filter"  size="9" ng-change= "changeInLocalSearch()" /></td>
+<td></td>
+<td></td>
+<td><span ng-hide = "localSearch.registration_no"><b>{{calculateTotal(tableRendered)}}</b></span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr  ng-repeat="woCF in filteredList = (woCFList| filter:localSearch)"  >
+		<td>{{woCF.fitness_cert_id}}</td>
+		<td>{{woCF.registration_no}}</td>
+		 <td>{{convertStringToDate(woCF.apply_dt) | date:'dd/MM/yyyy'}}</td> 
+		<td>{{convertStringToDate(woCF.to_date) | date:'dd/MM/yyyy'}}</td> 
+		
+		<td ng-init="$parent.total = $parent.total + woCF.amount">{{woCF.amount}}</td>
+		
+		<td ng-init="woCF.editMode = (!woCF.receipt_no)?true:false"><input type="text"  ng-model="woCF.receipt_no"  ng-disabled = "!woCF.editMode" size="9"></input>
+		<span class="red">{{woCF.emptyReceipt}}<span>
+		</td>
+		<td><input type="date" string-to-date ng-model="woCF.issue_dt" ng-disabled = "!woCF.editMode" ></input></td>
+		
+		<td><button type="button"  ng-show="!woCF.editMode && woCF.receipt_no" ng-click="woCF.editMode = 'true'"><i  class="fa fa-pencil" aria-hidden="true"></i></button>
+				
+		<button type="button" class="btn-warning" ng-show="woCF.editMode || !woCF.receipt_no" ng-click="saveWOCF(woCF,$index)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
+		<img ng-show= "woCF.wip" src="img/loader-xs.gif" ><span ng-show= "woCF.saved"><i class="fa fa-check"></i></span></td>
+			
+		
+	</tr>
+	
+	
+</tbody>
+</table>
+
+</div>	
+
+	<div class="row" ng-show="NO_RECORD_FOUND">
+	NO RECORD FOUND
+	</div>
+	
+
+		
+   </div>
+</div>
+			

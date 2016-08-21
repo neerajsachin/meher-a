@@ -1,0 +1,32 @@
+<label>Previous National Permits</label> <a  ng-href="javascript:void(0);" ng-click="listForView=0"><u>hide</u></a>
+
+<table class="table table-striped table-bordered jambo_table ">
+<thead>
+	<tr>
+		<th>ID</th>
+		<th>Permit No.</th>
+		<th>Issue Dt.</th>
+		<th>NP(A)From</th>
+		<th>NP(A)To</th>
+		<th>NP(B)From</th>
+		<th>NP(B)To</th>
+		<th>Auth</th>
+			
+	</tr>
+</thead>
+<tbody>
+	<tr  ng-repeat="nationalPermit in nationalPermitList">
+		<td><a  ng-href="javascript:void(0);" ng-click="showNationalPermit(nationalPermit)">{{nationalPermit.national_permit_id}}</a></td>
+		<td>{{nationalPermit.permit_no}}</td>
+		<td>{{nationalPermit.issue_dt_txt}}</td>
+		<td>{{nationalPermit.from_date_txt}}</td>
+		<td>{{nationalPermit.to_date_txt}}</td>
+		<td>{{nationalPermit.from_date_b_txt}}</td>
+		<td>{{nationalPermit.to_date_b_txt}}</td>
+				
+		<td>{{nationalPermit.authority}}</td>
+		
+		
+	</tr>
+	</tbody>
+  </table>

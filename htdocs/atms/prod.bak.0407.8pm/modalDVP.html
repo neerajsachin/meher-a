@@ -1,0 +1,64 @@
+<div class="modal fade" id="DVPModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+	  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<button id="pdfbypassme" type="button" class="btn btn-default" aria-expanded="false" onclick="printorsave()">Save</button>
+	  <h4 class="modal-title" align = "center" id="myModalLabel">
+M/S SURINDER KUMAR AGARWAL
+	  <br></br>
+	  THE VALIDITY OF THE DOCUMENTS OF YOUR VEHICLES AS PER OUR LIST. KINDLY ARRANGE FOR PRE-TIMELY RENEWAL.PLEASE INFORM FOR ANY CHANGES TO HELP US TO SERVE YOU BETTER
+	  <br></br>
+	  {{company.company_name}}
+	  </h4>
+<h4  class="modal-title" >THE VALIDITY OF THE DOCUMENTS OF YOUR VEHICLES AS PER OUR LIST. KINDLY ARRANGE FOR PRE-TIMELY RENEWAL.PLEASE INFORM FOR ANY CHANGES TO HELP US TO SERVE YOU BETTER
+	  </h4>      
+	  
+       
+      </div>
+      <div class="modal-body">
+	  
+	 <div class="row" >
+
+	<table  style="width:100%" ng-show = "vehiclesList.length" class="table table-striped table-bordered jambo_table">
+<thead>
+	<tr width="100%">
+		<th>ID</th>
+		<th>Reg No.</th>
+		<th>Type of Body.</th>
+		<th>P/L</th>
+		<th>Tax</th>
+		<th>NP(A)</th>
+		<th>NP(B)</th>
+		<th>CF</th>
+		<th>TP</th>
+		
+		
+	</tr>
+</thead>
+<tbody>
+	<tr  ng-repeat="vehicle in vehiclesList">
+		<td><u><a  ng-href="#vehicle/{{vehicle.record_id}}" >{{vehicle.record_id}}</u></a></td>
+		<td>{{vehicle.registration_no}}</td>
+		<td>{{vehicle.type_of_body}}</td>
+		<td>{{vehicle.payload}}</td>
+		<td>{{vehicle.tax_exp_dt_txt}}</td>
+		<td>{{vehicle.npa_exp_dt_txt}}</td>
+		<td>{{vehicle.npb_exp_dt_txt}}</td>
+		<td>{{vehicle.ft_exp_dt_txt}}</td>
+		<td>{{vehicle.tp_exp_dt_txt}}</td>
+	
+		
+	</tr>
+	</tbody>
+  </table>
+</div>
+	  
+	  </div>
+	  </div>
+     
+    </div>
+  </div>
+</div>

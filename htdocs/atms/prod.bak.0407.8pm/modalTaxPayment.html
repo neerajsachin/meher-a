@@ -1,0 +1,42 @@
+<div class="modal fade" id="taxModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+	   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  <h4 class="modal-title" id="myModalLabel">Tax Payment <span ng-show="taxPaymentCurrent.tax_payment_id"> (Record ID: {{taxPaymentCurrent.tax_payment_id}})</span></h4>
+      
+       
+      </div>
+      <div class="modal-body">
+	  <label>Period From:</label>
+	  <input  class="input-xs"    type="date" ng-model="taxPaymentCurrent.from_date" maxlength="10" size="10" ng-disabled="!editModeTaxPayment" > </input>
+	     <label>To:</label> <input  class="input-xs"    type="date" ng-model="taxPaymentCurrent.to_date" maxlength="10" size="10" ng-disabled="!editModeTaxPayment" > </input>
+       	
+	  <br></br>
+	  <label>Receipt No.:</label><input  class="input-xs"  type="text" ng-model="taxPaymentCurrent.receipt_no" maxlength="75" ng-disabled="!editModeTaxPayment"> </input>
+	  <label>Issue Dt.:</label>
+	  <input  class="input-xs"    type="date" ng-model="taxPaymentCurrent.issue_dt" maxlength="10" size="10" ng-disabled="!editModeTaxPayment" > </input>
+	  <br></br>
+	  <label>Amount:</label><input  class="input-xs" type="text" ng-model="taxPaymentCurrent.amount" ng-disabled="!editModeTaxPayment" > </input>
+	  <br></br>
+	  <label>Remark:</label><textarea  class="input-xs"   ng-model="taxPaymentCurrent.remarks" ng-disabled="!editModeTaxPayment" > </textarea>
+	  <br></br>
+	  <label>Authority:</label>
+	 {{vehicle.state}}
+<br></br>
+	 	 <span class="red" ng-show="modalTaxPaymentShowError">{{modalTaxPaymentErrorMsg}}</span>
+	  <!-- <select  class="input-xs" ng-disabled="!editModeTaxPayment" ng-model="taxPaymentCurrent.authority" ng-init = "taxPaymentCurrent.authority = 'Nagaland'">
+      <option value="Assam">Assam</option>
+      <option value="Nagaland" selected="selected">Nagaland</option>
+    </select> -->
+	  <!-- <label>District:</label><input  class="input-xs" type="text" ng-model="taxPaymentCurrent.district"  > </input> -->
+	  <br></br>
+	  <button ng-show = "editModeTaxPayment" type="button" class="btn btn-default" ng-click="saveTaxPayment()">Save</button>
+	  <button ng-show = "!editModeTaxPayment" type="button" class="btn btn-default" ng-click="editModeTaxPayment = true">Edit</button>
+	  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	  </div>
+	  </div>
+     
+    </div>
+  </div>
+</div>

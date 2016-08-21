@@ -1,0 +1,88 @@
+ <div class="row">
+   <div class="col-md-12 col-sm-12 col-xs-12">
+<div  class="row">
+<h4>Work Order - Tax Payments</h4>
+</div>
+
+<div  class="row">
+  <form  name="woTaxForm">
+<label> From: </label>
+  <input  class="input-xs"  type="date" ng-model="woTaxFromDate" required> </input> 
+
+<label> To: </label>
+  <input  class="input-xs"  type="date" ng-model="woTaxToDate" required> </input> 
+
+  <button  type="button" class="btn   btn-warning" ng-click="searchWOTax('ApplyDate')">By Application Date</button> 
+  <button  type="button" class="btn   btn-success" ng-click="searchWOTax('IssueDate')">By Issue Date</button> 
+  <!-- <button  type="submit" class="btn   btn-primary" ng-click="searchWOTax()">Pending</button> -->
+  
+ </form>
+	
+	<span  ng-hide= "localSearch.registration_no || woTaxList.length ==0" class="pull-right"><button  type="submit" class="btn   btn-primary" ng-click="saveAllWOTax()">Save All</button> </span>
+</div>
+<div  class="row">
+<span class="red" ng-show="errMsg">{{errMsg}}</span>
+</div>
+<div class="row" ng-show="woTaxList.length">
+<table class="table table-condensed table-striped table-bordered jambo_table" >
+<thead>
+<tr>
+		<th>ID</th>
+		<th>Reg No.</th>
+		<th>Apply Dt.</th>
+		<th>Exp Dt.</th>
+		<th>Amount </th>
+		<th>Receipt No.</th>
+		<th>Issue Dt.</th>
+		<th></th>
+		
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td >  <input type="text"  ng-model="localSearch.registration_no" placeholder = "Advance filter"  size="9" ng-change= "changeInLocalSearch()" /></td>
+<td></td>
+<td></td>
+<td><span ng-hide = "localSearch.registration_no"><b>{{calculateTotal(tableRendered)}}</b></span></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr  ng-repeat="woTax in filteredList = (woTaxList| filter:localSearch)"  >
+		<td>{{woTax.tax_payment_id}}</td>
+		<td>{{woTax.registration_no}}</td>
+		 <td>{{convertStringToDate(woTax.apply_dt) | date:'dd/MM/yyyy'}}</td> 
+		<td>{{convertStringToDate(woTax.to_date) | date:'dd/MM/yyyy'}}</td> 
+		
+		<td ng-init="$parent.total = $parent.total + woTax.amount">{{woTax.amount}}</td>
+		
+		<td ng-init="woTax.editMode = (!woTax.receipt_no)?true:false"><input type="text"  ng-model="woTax.receipt_no"  ng-disabled = "!woTax.editMode" size="9"></input>
+		<span class="red">{{woTax.emptyReceipt}}<span>
+		</td>
+		<td><input type="date" string-to-date ng-model="woTax.issue_dt" ng-disabled = "!woTax.editMode" ></input></td>
+		
+		<td><button type="button"  ng-show="!woTax.editMode && woTax.receipt_no" ng-click="woTax.editMode = 'true'"><i  class="fa fa-pencil" aria-hidden="true"></i></button>
+				
+		<button type="button" class="btn-warning" ng-show="woTax.editMode || !woTax.receipt_no" ng-click="saveWOTax(woTax,$index)"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
+		<img ng-show= "woTax.wip" src="img/loader-xs.gif" ><span ng-show= "woTax.saved"><i class="fa fa-check"></i></span></td>
+			
+		
+	</tr>
+	
+	
+</tbody>
+</table>
+
+</div>	
+
+	<div class="row" ng-show="NO_RECORD_FOUND">
+	NO RECORD FOUND
+	</div>
+	
+
+		
+   </div>
+</div>
+			

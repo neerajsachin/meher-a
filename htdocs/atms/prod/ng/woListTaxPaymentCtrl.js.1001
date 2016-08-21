@@ -1,0 +1,89 @@
+
+myApp.controller('_woListTaxPayment_', function($scope,$timeout, $log,taxPaymentFactory,$location) {
+ 
+ 
+ $scope.woTaxList = [];
+ $scope.goodToSaveList = [];
+
+ $scope.woTaxFromDate = new Date(moment().subtract(1,'days').startOf('day'));
+ $scope.woTaxToDate = new Date(moment().endOf('day'));
+ 
+ 
+$scope.searchWOTax = function(criteria){
+
+	
+	
+if(!$scope.woTaxForm.$valid){
+	return;
+}
+
+$scope.NO_RECORD_FOUND  = false;
+
+taxPaymentFactory.getwoTaxList (criteria,$scope.woTaxFromDate, $scope.woTaxToDate, function(err,data){
+if(err){
+	// TBC
+}
+
+
+$scope.woTaxList = data.data;
+
+for (i = 0; i < $scope.woTaxList.length; i++) { 
+    if(!$scope.woTaxList[i].issue_dt){
+		$scope.woTaxList[i].issue_dt = new Date(moment().startOf('day'));
+	}
+}
+
+
+$scope.NO_RECORD_FOUND = ($scope.woTaxList.length>0)?false:true;
+
+})	
+};
+
+
+	$scope.convertStringToDate = function(dateTxt) {
+	//var dateObj = new Date(dateTxt);	
+	//return  dateObj.getDate() + "/" +( dateObj.getMonth() + 1 )+ "/" + dateObj.getFullYear();
+return new Date(dateTxt);
+	} 
+
+$scope.saveWOTax = function(woTaxObj,index){
+$log.log("index for saving - " + index );
+taxPaymentFactory.saveWOTax(woTaxObj,0,function(err,data,indexout){
+if(data.status =="S"){
+$scope.filteredList[index].saved = true;
+}	
+if(err || data.status == "E"){
+$scope.filteredList[index].error  = true;		
+}
+
+});	
+	
+} //END saveWOTax
+
+$scope.saveAllWOTax = function(){
+	var i;
+	for (i = 0; i < $scope.filteredList.length; i++) { 
+	
+    if($scope.filteredList[i].receipt_no){
+		
+		
+	$scope.filteredList[i].wip = true;
+	taxPaymentFactory.saveWOTax($scope.filteredList[i],i,function(err,data,indexout){
+	
+	$scope.filteredList[indexout].wip = false;
+		$scope.filteredList[indexout].saved = true;
+		
+	});	
+}
+	
+	}
+	
+}
+
+
+
+ 
+ });
+
+
+

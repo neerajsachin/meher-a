@@ -1,0 +1,72 @@
+ <div class="row">
+   <div class="col-md-12 col-sm-12 col-xs-12">
+<div  class="row">
+<h4>Search Company</h4>
+</div>
+
+<div  class="row">
+  <form  name="searchCompanyForm">
+<input  placeholder = "Company Name , Contact Person, Mobile No, SMS No, City" class="input-xs"  type="text" ng-model="txt" maxlength="50" size="80"  required autofocus> </input> 
+ <button  type="submit" class="btn   btn-primary" ng-click="searchCompany()">Go</button> 
+ </form>
+	
+</div>
+
+<div>
+Total Count - {{companysList.length}} , 
+Filtered Count - {{filtered.length}}
+</div>
+
+<div class="row" ng-show="companysList.length">
+<table class="table table-striped table-bordered jambo_table">
+<thead>
+<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Contact Person1</th>
+		<th>City</th>
+		<th>Mobile1</th>
+		<th>SMS Alert No</th>
+		
+		
+
+</tr>
+</thead>
+<tfoot>
+<td colspan = "6"> 
+   <uib-pagination total-items="filtered.length" ng-model="bigCurrentPage" max-size="maxSize" entry-limit="entryLimit" class="pagination-sm" boundary-links="true" rotate="false"></uib-pagination>
+  
+</td>
+
+</tfoot>
+<tbody>
+<tr>
+<td colspan = "6">  <input type="text" ng-model="localSearch" placeholder = "Advance filter"   /></td>
+
+</tr>
+<tr  ng-repeat="company in filtered = (companysList | filter:localSearch) | startFrom:(bigCurrentPage-1)*entryLimit | limitTo:entryLimit">
+		<td><u><a  ng-href="#showCompany/{{company.company_id}}"> {{company.company_id}}</u></a></td>
+		<td><u><a  ng-href="#showCompany/{{company.company_id}}"> {{company.company_name}}</u></a></td>
+
+		<td>{{company.contact_person1}}</td>
+		<td>{{company.address_city}}</td>
+		<td>{{company.mobile1}}</td>
+		<td>{{company.sms_alert_no}}</td>
+		
+		
+	</tr>
+	
+</tbody>
+</table>
+
+</div>	
+
+	<div class="row" ng-show="NO_RECORD_FOUND">
+	NO RECORD FOUND
+	</div>
+	
+
+		
+   </div>
+</div>
+			
