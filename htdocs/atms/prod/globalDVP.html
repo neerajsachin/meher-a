@@ -18,23 +18,28 @@
  </div>
  <div  class="row">
 <div class="col-xs-12 col-md-12">
-  <table  class="table table-condensed table-striped table-bordered table-hover " ng-table="tableParams"  >
+  <table  class="table table-condensed table-bordered table-hover " ng-table="tableParams"  >
 
 
 
 <tr class="ng-table-group" ng-repeat-start="group in $groups" >
- <td colspan="7" >
+ <td colspan="7" class="bg-info" >
             <a href="" ng-click="group.$hideRows = !group.$hideRows">
               <span class="glyphicon" ng-class="{ 'glyphicon-chevron-right': group.$hideRows, 'glyphicon-chevron-down': !group.$hideRows }"></span>
-              <strong>{{ group.value }}</strong>
+              <strong class="groupValueText">{{ group.value }} </strong>
             </a>
+            <button class = "btn btn-xs btn-primary" ng-click="sendSMS(group.data)">sms</button> 
+            <small class="text-muted">[sms1 -  {{group.data[0].sms_alert_no || 'n/a'}}, </small>
+            <small class="text-muted">sms2  -  {{group.data[0].sms_alert_no2 || 'n/a'}}]</small>
+            <small ng-attr-id="{{'smsResult-' + group.data[0].company_id}}" style="display:none;" class="bg-success"></small>
+          		<small class="pull-right text-muted nav-text">last SMS sent - <span ng-attr-id="{{'lastSMS-' + group.data[0].company_id }}">{{toDate(group.data[0].last_sms_dvp)}}</span></small>
           </td> 
 
 </tr>
 		
 		<tr  ng-hide="group.$hideRows" ng-repeat="vehicle in group.data" ng-repeat-end  >
 		<td title="'Company ID'"  ><a  ng-href="#showCompany/{{vehicle.company_id}}">{{vehicle.company_id}}</a></td>
-		<td  title="'Company Name'" groupable="'company_name'">{{vehicle.company_name}}</td>
+		<td  title="'Company Name'" groupable="'company_name'"> {{vehicle.company_name}} </td>
 		<td sortable="'registration_no'" title="'Reg No.'" > <a  ng-href="#vehicle/{{vehicle.record_id}}" >{{vehicle.registration_no}}</a></td>
 		<td title="'Owner'"  >{{vehicle.owner}}</td>
 		<td title="'CF'" ng-class="checkAlert(convertStringToDate(vehicle.ft_exp_dt))">{{convertStringToDate(vehicle.ft_exp_dt) | date:'dd/MM/yyyy'}}</td>
