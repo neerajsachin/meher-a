@@ -9,10 +9,22 @@
        
       </div>
       <div class="modal-body">
+
+         <label>Application Date:</label>
+   <input  class="input-xs"    type="date" ng-model="fitnessCertCurrent.apply_dt" maxlength="10" size="10" ng-disabled="!editModeFitnessCert" > </input>
+   <br></br>
 	  <label>Period From:</label>
-	   <input  class="input-xs"    type="date" ng-model="fitnessCertCurrent.from_date" maxlength="10" size="10" ng-disabled="!editModeFitnessCert" > </input>
-     <label>To:</label> 
-	 
+	   <!-- <input  class="input-xs"    type="date" ng-model="fitnessCertCurrent.from_date" maxlength="10" size="10" ng-disabled="!editModeFitnessCert" > </input> -->
+     {{fitnessCertCurrent.apply_dt | date:'dd/MM/yyyy'}}
+     
+     
+     <div class="btn-group" ">
+        <!-- <button   type="button" class="btn  btn-warning" ng-click="addNPA('6M')">6M</button> -->
+  <button   type="button" class="btn-success" ng-click="addCFDate('1Y')">1Y</button>
+  <button   type="button" class="btn-warning" ng-click="addCFDate('2Y')">2Y</button>
+   
+      </div>
+	 <label>To:</label> 
 	 <input  class="input-xs"    type="date" ng-model="fitnessCertCurrent.to_date" maxlength="10" size="10" ng-disabled="!editModeFitnessCert" > </input>
        	
 	  <br></br>
@@ -39,8 +51,7 @@
       <option value="N" selected="selected">N</option>
     </select>
 	  
-	  <label>Application Date:</label>
-	  <input  class="input-xs"    type="date" ng-model="fitnessCertCurrent.apply_dt" maxlength="10" size="10" ng-disabled="!editModeFitnessCert" > </input>
+	 
 	  
 	  <br></br>
 
@@ -69,4 +80,6 @@
      
     </div>
   </div>
+
 </div>
+

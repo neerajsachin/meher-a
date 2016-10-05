@@ -251,6 +251,7 @@ $scope.saveFitenssCert = function(){
 	$scope.fitnessCertCurrent.company_name = $scope.vehicle.company_name;
 	$scope.fitnessCertCurrent.company_id = $scope.vehicle.company_id;
 	$scope.fitnessCertCurrent.prev_exp_dt = $scope.vehicle.ft_exp_dt;
+	$scope.fitnessCertCurrent.from_date = $scope.fitnessCertCurrent.apply_dt;
 	
 	fitnessCertFactory.saveFitnessCert ($scope.fitnessCertCurrent,function(err,data){
 		  if(data.status != "S"){
@@ -420,8 +421,8 @@ $scope.taxPaymentCurrent = {};
 $scope.taxPaymentCurrent.authority = $scope.vehicle.state;
 $scope.taxPaymentCurrent.apply_dt = new Date(moment().add('1','day'));
 $scope.taxPaymentCurrent.from_date = ($scope.vehicle.tax_exp_dt) ? new Date (moment($scope.vehicle.tax_exp_dt).add(1,'day')): new Date();
-var temp = $scope.taxPaymentCurrent.from_date;
-$scope.taxPaymentCurrent.to_date = new Date (moment(temp ).add(1,'year').subtract('1','day'));
+//var temp = $scope.taxPaymentCurrent.from_date;
+//$scope.taxPaymentCurrent.to_date = new Date (moment(temp ).add(1,'year').subtract('1','day'));
 $('#taxModal').modal(
 {backdrop: true,show: true}
 );	
@@ -435,9 +436,9 @@ $scope.fitnessCertCurrent.authority = $scope.vehicle.state;
 $scope.fitnessCertCurrent.apply_dt = new Date(moment().add('1','day'));
 $scope.fitnessCertCurrent.cf_issued = 'Y';
 $scope.fitnessCertCurrent.amount = "400";
-$scope.fitnessCertCurrent.from_date = ($scope.vehicle.ft_exp_dt) ? new Date (moment($scope.vehicle.ft_exp_dt).add(1,'day')): new Date();
-var temp = $scope.fitnessCertCurrent.from_date;
-$scope.fitnessCertCurrent.to_date = new Date (moment(temp ).add(1,'year').subtract('1','day'));
+//$scope.fitnessCertCurrent.from_date = $scope.fitnessCertCurrent.apply_dt;
+//var temp = $scope.fitnessCertCurrent.apply_dt;
+//$scope.fitnessCertCurrent.to_date = new Date (moment(temp ).add(1,'year').subtract('1','day'));
 
 $('#fitnessModal').modal(
 {backdrop: true,show: true}
@@ -563,6 +564,22 @@ $scope.cloneVehicle = function(){
 }	
   
 
+$scope.addCFDate = function(duration){
+var tempDate = new moment($scope.fitnessCertCurrent.apply_dt);
+
+if(duration == '1Y'){tempDate.add(1, 'years').subtract(1,'days');}
+if(duration == '2Y'){tempDate.add(2, 'years').subtract(1,'days');}
+$scope.fitnessCertCurrent.to_date = new Date(tempDate);
+}
+
+
+$scope.addTaxDate = function(duration){
+var tempDate = new moment($scope.taxPaymentCurrent.from_date);
+
+if(duration == '1Y'){tempDate.add(1, 'years').subtract(1,'days');}
+
+$scope.taxPaymentCurrent.to_date = new Date(tempDate);
+}
 
 $scope.addNPA = function(duration){
 var tempDate = new moment($scope.nationalPermitCurrent.from_date);
