@@ -228,7 +228,10 @@ $scope.saveTaxPayment = function(){
         	$scope.modalTaxPaymentShowError = false;
         	$scope.editModeTaxPayment  = false;
            $scope.taxPaymentCurrent.tax_payment_id = ($scope.taxPaymentCurrent.tax_payment_id)?$scope.taxPaymentCurrent.tax_payment_id:data.tax_payment_id;
+           $scope.getVehicleByRecordID();
+       		$scope.showAllTaxPayments();
         }
+
 
 		
 		
@@ -258,6 +261,8 @@ $scope.saveFitenssCert = function(){
         	$scope.modalFitnessCertShowError = false;
         	$scope.editModeFitnessCert  = false;
            $scope.fitnessCertCurrent.fitness_cert_id = ($scope.fitnessCertCurrent.fitness_cert_id)?$scope.fitnessCertCurrent.fitness_cert_id:data.fitness_cert_id;
+       	$scope.getVehicleByRecordID();
+       	$scope.showAllFitnessCerts();
         }
 
 
@@ -340,6 +345,8 @@ $scope.saveNationalPermit = function(){
         	$scope.modalNationalPermitShowError = false;
         	$scope.editModeNationalPermit  = false;
            $scope.nationalPermitCurrent.national_permit_id = ($scope.nationalPermitCurrent.national_permit_id)?$scope.nationalPermitCurrent.national_permit_id:data.national_permit_id;
+        $scope.getVehicleByRecordID();
+        $scope.showAllNationalPermits();
         }
 		
 		}
@@ -372,6 +379,7 @@ fitnessCert.to_date = new Date(fitnessCert.to_date);
 fitnessCert.issue_dt = new Date(fitnessCert.issue_dt);
 fitnessCert.apply_dt = new Date(fitnessCert.apply_dt);
 $scope.fitnessCertCurrent = fitnessCert;
+
 $scope.editModeFitnessCert = false;
 $('#fitnessModal').modal(
 {backdrop: false,show: true}
@@ -410,8 +418,10 @@ $scope.newTaxPayment = function(){
 $scope.editModeTaxPayment = true;
 $scope.taxPaymentCurrent = {};
 $scope.taxPaymentCurrent.authority = $scope.vehicle.state;
-$scope.taxPaymentCurrent.apply_dt = new Date();
-
+$scope.taxPaymentCurrent.apply_dt = new Date(moment().add('1','day'));
+$scope.taxPaymentCurrent.from_date = ($scope.vehicle.tax_exp_dt) ? new Date (moment($scope.vehicle.tax_exp_dt).add(1,'day')): new Date();
+var temp = $scope.taxPaymentCurrent.from_date;
+$scope.taxPaymentCurrent.to_date = new Date (moment(temp ).add(1,'year').subtract('1','day'));
 $('#taxModal').modal(
 {backdrop: true,show: true}
 );	
@@ -422,8 +432,13 @@ $log.log("newFitnessCert  called");
 $scope.editModeFitnessCert = true;
 $scope.fitnessCertCurrent = {};
 $scope.fitnessCertCurrent.authority = $scope.vehicle.state;
-$scope.fitnessCertCurrent.apply_dt = new Date();
+$scope.fitnessCertCurrent.apply_dt = new Date(moment().add('1','day'));
 $scope.fitnessCertCurrent.cf_issued = 'Y';
+$scope.fitnessCertCurrent.amount = "400";
+$scope.fitnessCertCurrent.from_date = ($scope.vehicle.ft_exp_dt) ? new Date (moment($scope.vehicle.ft_exp_dt).add(1,'day')): new Date();
+var temp = $scope.fitnessCertCurrent.from_date;
+$scope.fitnessCertCurrent.to_date = new Date (moment(temp ).add(1,'year').subtract('1','day'));
+
 $('#fitnessModal').modal(
 {backdrop: true,show: true}
 );	
@@ -444,7 +459,7 @@ $scope.modalNationalPermitShowError = false;
 $log.log("newNationalPermit  called");
 $scope.nationalPermitCurrent = {};
 $scope.nationalPermitCurrent.authority = $scope.vehicle.state;
-$scope.nationalPermitCurrent.apply_dt = new Date();
+$scope.nationalPermitCurrent.apply_dt = new Date(moment().add('1','day'));
 $scope.nationalPermitCurrent.permit_no = $scope.vehicle.permit_no;
 $scope.nationalPermitCurrent.state_amount = 1000;
 $scope.nationalPermitCurrent.national_amount = 16500;
@@ -602,6 +617,8 @@ $log.log('vehicle controller delete item for ' + itemType + " - " + itemID );
 
 
 }
+
+
 
 
 
